@@ -1,0 +1,1 @@
+export const metadata={title:'Sobre a Nexora'};export default function Page(){return <div className="container-site max-w-3xl py-16"><h1 className="text-4xl font-black">Sobre a Nexora</h1><p className="mt-6 text-lg leading-8 text-slate-600">A Nexora é um projeto editorial independente de tecnologia em desenvolvimento.</p></div>}
