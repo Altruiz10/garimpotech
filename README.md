@@ -1,4 +1,4 @@
-# Nexora — Sprint 1
+# Garimpo Tech — Sprint 1
 
 Projeto Next.js 15 (App Router), TypeScript, Tailwind CSS 4 e Lucide React.
 
