@@ -11,33 +11,30 @@ export function iconFor(key:string):LucideIcon{
 
 export function CategoryCard({item}:{item:Category}){
   const Icon=iconFor(item.slug);
-  return <Link className="card hover-lift flex flex-col items-center gap-3 px-3 py-7 text-center" href={`/categorias/${item.slug}`}>
-    <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gold-soft text-gold-ink"><Icon size={28} aria-hidden/></span>
-    <span className="font-bold">{item.name}</span>
-  </Link>
+  return <li className="border-t border-line">
+    <Link className="group flex min-h-20 items-center gap-4 py-4" href={`/categorias/${item.slug}`}>
+      <Icon size={26} className="shrink-0 text-gold-ink" aria-hidden/>
+      <span className="min-w-0 flex-1"><span className="block text-lg font-extrabold group-hover:underline">{item.name}</span><span className="block text-sm text-muted">{item.description}</span></span>
+      <ArrowUpRight size={18} className="shrink-0 text-muted" aria-hidden/>
+    </Link>
+  </li>
 }
 
 export function GuideCard({item}:{item:Guide}){
-  const Icon=iconFor(item.category);
-  return <Link className="card hover-lift group block" href={`/guias/${item.slug}`}>
-    <div className="flex h-40 items-center justify-center bg-gradient-to-br from-gold-soft to-paper"><span className="flex h-20 w-20 items-center justify-center rounded-3xl bg-surface text-ink shadow-sm"><Icon size={40} aria-hidden/></span></div>
-    <div className="p-6">
-      <span className="text-xs font-bold uppercase tracking-wide text-gold-ink">{item.category} · Guia</span>
-      <h3 className="mt-2 text-xl font-bold leading-snug">{item.title}</h3>
-      <p className="mt-2 text-sm leading-6 text-muted">{item.summary}</p>
-      <span className="mt-4 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-gold-ink group-hover:underline">Ler guia <ArrowUpRight size={16}/></span>
-    </div>
+  return <Link className="group block border-t-2 border-ink pt-5" href={`/guias/${item.slug}`}>
+    <span className="text-sm font-semibold text-gold-ink">{item.category}</span>
+    <h3 className="mt-2 text-2xl font-extrabold leading-tight group-hover:underline">{item.title}</h3>
+    <p className="mt-3 leading-7 text-muted">{item.summary}</p>
+    <span className="mt-4 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-gold-ink">Ler guia <ArrowUpRight size={16} aria-hidden/></span>
   </Link>
 }
 
 export function ProductCard({item}:{item:Product}){
   const Icon=iconFor(item.category);
-  return <article className="card flex flex-col">
-    <div className="flex h-36 items-center justify-center bg-paper"><span className="flex h-20 w-20 items-center justify-center rounded-3xl bg-surface text-ink shadow-sm"><Icon size={40} aria-hidden/></span></div>
-    <div className="flex flex-1 flex-col p-6">
-      <h3 className="text-lg font-bold">{item.name}</h3>
-      <p className="mt-2 flex-1 text-sm leading-6 text-muted">{item.description}</p>
-      <Link href={`/produtos/${item.slug}`} className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gold px-4 text-sm font-bold text-ink hover:bg-gold-hover"><BookOpen size={17}/> Ver orientações</Link>
-    </div>
+  return <article className="card flex flex-col p-6">
+    <span className="flex h-11 w-11 items-center justify-center rounded-md bg-gold-soft text-gold-ink"><Icon size={22} aria-hidden/></span>
+    <h3 className="mt-5 text-xl font-extrabold">{item.name}</h3>
+    <p className="mt-2 flex-1 leading-7 text-muted">{item.description}</p>
+    <Link href={`/produtos/${item.slug}`} className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-gold px-4 text-sm font-bold text-ink hover:bg-gold-hover"><BookOpen size={17} aria-hidden/> Ver orientações</Link>
   </article>
 }

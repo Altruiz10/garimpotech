@@ -1,29 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #fbf9f4;
+  --color-paper: #eef1ee;
   --color-surface: #ffffff;
-  --color-ink: #12151c;
-  --color-night: #12151c;
-  --color-muted: #566072;
-  --color-line: #e7e2d6;
-  --color-gold: #f5b301;
-  --color-gold-hover: #e0a200;
-  --color-gold-soft: #fff4d1;
-  --color-gold-ink: #8a5a00;
+  --color-ink: #11302a;
+  --color-night: #0d2621;
+  --color-muted: #4a5f59;
+  --color-line: #c9d4cf;
+  --color-gold: #f2b705;
+  --color-gold-hover: #dca400;
+  --color-gold-soft: #f6e7b0;
+  --color-gold-ink: #7a5200;
 }
 
 @theme inline {
-  --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-display: var(--font-bricolage), var(--font-inter), system-ui, sans-serif;
+  --font-sans: var(--font-public), system-ui, sans-serif;
+  --font-display: var(--font-archivo), var(--font-public), system-ui, sans-serif;
 }
 
 :root {
-  --focus: #12151c;
+  --focus: #11302a;
 }
 
 .on-dark {
-  --focus: #fbf9f4;
+  --focus: #eef1ee;
 }
 
 @layer base {
@@ -58,18 +58,12 @@
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-line);
-  border-radius: 1.25rem;
+  border-radius: 0.75rem;
   overflow: hidden;
 }
 
-.hover-lift {
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-}
-
-.hover-lift:hover {
-  transform: translateY(-3px);
-  border-color: var(--color-ink);
-  box-shadow: 0 12px 30px #12151c14;
+.tabular {
+  font-variant-numeric: tabular-nums;
 }
 
 @media (prefers-reduced-motion: reduce) {
