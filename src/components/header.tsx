@@ -4,7 +4,7 @@ import Link from "next/link";
 import {Menu,Search,X} from "lucide-react";
 import {Brand} from "./brand";
 
-const links=[{href:"/categorias",label:"Categorias"},{href:"/melhores",label:"Guias"},{href:"/ofertas",label:"Produtos"}];
+const links=[{href:"/",label:"Início"},{href:"/categorias",label:"Categorias"},{href:"/melhores",label:"Guias"},{href:"/ofertas",label:"Produtos"}];
 
 export function Header(){
   const [open,setOpen]=useState(false);
