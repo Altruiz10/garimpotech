@@ -3,6 +3,7 @@ import {useState} from "react";
 import Link from "next/link";
 import {Menu,Search,X} from "lucide-react";
 import {Brand} from "./brand";
+import {ThemeToggle} from "./theme-toggle";
 
 const links=[{href:"/",label:"Início"},{href:"/categorias",label:"Categorias"},{href:"/melhores",label:"Guias"},{href:"/ofertas",label:"Produtos"}];
 
@@ -16,6 +17,7 @@ export function Header(){
       </nav>
       <div className="flex items-center gap-1">
         <Link href="/buscar" aria-label="Buscar" className="flex h-11 w-11 items-center justify-center rounded-lg hover:bg-ink/5"><Search size={21}/></Link>
+        <ThemeToggle/>
         <button className="flex h-11 w-11 items-center justify-center rounded-lg hover:bg-ink/5 md:hidden" onClick={()=>setOpen(!open)} aria-label={open?"Fechar menu":"Abrir menu"} aria-expanded={open}>{open?<X/>:<Menu/>}</button>
       </div>
     </div>

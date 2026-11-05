@@ -5,7 +5,7 @@ import type {TopPhone} from "@/data/content";
 const affiliateRel="sponsored nofollow noopener noreferrer";
 
 function Cta({item,className=""}:{item:TopPhone;className?:string}){
-  return <a href={item.href} target="_blank" rel={affiliateRel} className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-gold px-5 text-sm font-bold text-ink hover:bg-gold-hover ${className}`}>Ver oferta no Mercado Livre <ArrowUpRight size={16} aria-hidden/></a>
+  return <a href={item.href} target="_blank" rel={affiliateRel} className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-gold px-5 text-sm font-bold text-on-gold hover:bg-gold-hover ${className}`}>Ver oferta no Mercado Livre <ArrowUpRight size={16} aria-hidden/></a>
 }
 
 function Price({item,dark=false,big=false}:{item:TopPhone;dark?:boolean;big?:boolean}){
