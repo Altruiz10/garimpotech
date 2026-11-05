@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sem conexão | Garimpo Tech</title>
+<style>
+  :root{color-scheme:light dark;--bg:#eef1ee;--ink:#11302a;--muted:#4a5f59}
+  @media (prefers-color-scheme:dark){:root{--bg:#0a1a16;--ink:#e9f1ee;--muted:#9db4ab}}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;padding:1.5rem;background:var(--bg);color:var(--ink);font-family:system-ui,sans-serif;text-align:center}
+  main{max-width:26rem}
+  h1{font-size:2rem;margin:0 0 .75rem;line-height:1.1}
+  p{color:var(--muted);line-height:1.6;margin:0 0 1.5rem}
+  button{min-height:3rem;padding:0 1.5rem;border:0;border-radius:.375rem;background:#f2b705;color:#11302a;font-weight:700;font-size:1rem;cursor:pointer}
+</style>
+</head>
+<body>
+<main>
+  <h1>Você está sem conexão</h1>
+  <p>O Garimpo Tech precisa de internet para mostrar o ranking e os preços atualizados. Verifique sua conexão e tente de novo.</p>
+  <button onclick="location.reload()">Tentar novamente</button>
+</main>
+</body>
+</html>
