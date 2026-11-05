@@ -35,6 +35,6 @@ export function ProductCard({item}:{item:Product}){
     <span className="flex h-11 w-11 items-center justify-center rounded-md bg-gold-soft text-gold-ink"><Icon size={22} aria-hidden/></span>
     <h3 className="mt-5 text-xl font-extrabold">{item.name}</h3>
     <p className="mt-2 flex-1 leading-7 text-muted">{item.description}</p>
-    <Link href={`/produtos/${item.slug}`} className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-gold px-4 text-sm font-bold text-ink hover:bg-gold-hover"><BookOpen size={17} aria-hidden/> Ver orientações</Link>
+    <Link href={`/produtos/${item.slug}`} className="mt-6 inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-gold px-4 text-sm font-bold text-on-gold hover:bg-gold-hover"><BookOpen size={17} aria-hidden/> Ver orientações</Link>
   </article>
 }

@@ -24,6 +24,6 @@ export default async function Page({params}:{params:Promise<{slug:string}>}){
       <p className="mt-8 max-w-2xl text-sm leading-6 text-muted">Os botões são links de afiliado: se você comprar por eles, o Garimpo Tech pode receber uma comissão, sem custo extra para você. <Link href="/transparencia" className="font-bold text-gold-ink underline">Saiba mais</Link>.</p>
     </section>}
     {items.length>0&&<div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{items.map(p=><ProductCard key={p.slug} item={p}/>)}</div>}
-    {items.length===0&&phones.length===0&&<p className="mt-8 rounded-xl bg-white p-6 text-muted">Novos conteúdos desta categoria serão publicados em breve.</p>}
+    {items.length===0&&phones.length===0&&<p className="mt-8 rounded-xl bg-surface p-6 text-muted">Novos conteúdos desta categoria serão publicados em breve.</p>}
   </div>
 }
