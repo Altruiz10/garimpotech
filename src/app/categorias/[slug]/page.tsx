@@ -1,17 +1,32 @@
 import {notFound} from "next/navigation";
 import Link from "next/link";
-import {categories,products,topPhones,topPhonesUpdatedAt} from "@/data/content";
+import type {Metadata} from "next";
+import {categories,products,topPhonesUpdatedAt} from "@/data/content";
+import {noIndex,rankingFor} from "@/lib/site";
 import {ProductCard,iconFor} from "@/components/cards";
 import {TopPhoneBoard} from "@/components/top-phones";
 
 export function generateStaticParams(){return categories.map(c=>({slug:c.slug}))}
+
+export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{
+  const {slug}=await params;
+  const cat=categories.find(c=>c.slug===slug);
+  if(!cat)return {};
+  const ranked=rankingFor(slug).length>0;
+  return {
+    title:ranked?`${cat.name} mais vendidos no Mercado Livre`:cat.name,
+    description:ranked?`Ranking dos ${cat.name.toLowerCase()} mais vendidos no Mercado Livre, atualizado em ${topPhonesUpdatedAt}.`:cat.description,
+    alternates:{canonical:`/categorias/${slug}`},
+    ...(ranked?{}:{robots:noIndex}),
+  };
+}
 
 export default async function Page({params}:{params:Promise<{slug:string}>}){
   const {slug}=await params;
   const cat=categories.find(c=>c.slug===slug);
   if(!cat)notFound();
   const items=products.filter(p=>p.category===slug);
-  const phones=slug==="celulares"?topPhones:[];
+  const phones=rankingFor(slug);
   const Icon=iconFor(slug);
   return <div className="container-site py-14">
     <Link href="/categorias" className="inline-flex min-h-11 items-center text-sm font-semibold text-gold-ink hover:underline">← Categorias</Link>
