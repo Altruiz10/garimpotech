@@ -11,6 +11,8 @@ function SectionHeading({title,href,label}:{title:string;href:string;label:strin
   </div>
 }
 
+export const metadata={description:"Os celulares mais vendidos no Mercado Livre, com preço, ficha resumida e link direto para a oferta. Guias para escolher tecnologia melhor.",alternates:{canonical:"/"}};
+
 export default function Home(){
   return <>
     <Hero/>

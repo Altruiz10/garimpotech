@@ -1,9 +1,14 @@
 "use client";
 import {useEffect,useState} from "react";
+import {usePathname} from "next/navigation";
 import {Download,Share,X} from "lucide-react";
 
 type InstallEvent=Event&{prompt:()=>Promise<void>;userChoice:Promise<{outcome:"accepted"|"dismissed"}>};
 const DISMISS_KEY="install-prompt-dismissed";
+const PAGES_KEY="install-prompt-pages";
+const RETURNING_KEY="install-prompt-returning";
+/** Páginas vistas na visita antes de oferecer a instalação a quem chega pela primeira vez. */
+const MIN_PAGES=2;
 
 function isStandalone(){
   return window.matchMedia("(display-mode: standalone)").matches||(navigator as Navigator&{standalone?:boolean}).standalone===true;
@@ -15,12 +20,40 @@ function isIos(){
 function dismissedThisVisit(){
   try{return sessionStorage.getItem(DISMISS_KEY)==="1"}catch{return false}
 }
+/** Quem já veio antes vê o aviso logo; quem chega pela primeira vez, depois de ver MIN_PAGES páginas. */
+function readEngagement(){
+  try{
+    const firstPageOfVisit=sessionStorage.getItem(PAGES_KEY)===null;
+    const returning=firstPageOfVisit?localStorage.getItem(RETURNING_KEY)==="1":sessionStorage.getItem(RETURNING_KEY)==="1";
+    if(firstPageOfVisit){
+      sessionStorage.setItem(RETURNING_KEY,returning?"1":"0");
+      localStorage.setItem(RETURNING_KEY,"1");
+    }
+    return {returning};
+  }catch{return {returning:false}}
+}
+function countPage(){
+  try{
+    const n=Number(sessionStorage.getItem(PAGES_KEY)??"0")+1;
+    sessionStorage.setItem(PAGES_KEY,String(n));
+    return n;
+  }catch{return 1}
+}
 
-/** Registra o service worker e pergunta, a cada visita, se o cliente quer instalar o app. */
+/** Registra o service worker e, a cada visita, oferece instalar o app a quem demonstrou interesse. */
 export function InstallPrompt(){
   const [deferred,setDeferred]=useState<InstallEvent|null>(null);
   const [ios,setIos]=useState(false);
   const [visible,setVisible]=useState(false);
+  const [engaged,setEngaged]=useState(false);
+  const pathname=usePathname();
+
+  // Conta cada página vista na visita (inclui navegação interna sem recarregar).
+  useEffect(()=>{
+    const {returning}=readEngagement();
+    const pages=countPage();
+    if(returning||pages>=MIN_PAGES)setEngaged(true);
+  },[pathname]);
 
   useEffect(()=>{
     if("serviceWorker" in navigator&&process.env.NODE_ENV==="production"){
@@ -55,7 +88,7 @@ export function InstallPrompt(){
     setVisible(false);
   }
 
-  if(!visible||(!deferred&&!ios))return null;
+  if(!visible||!engaged||(!deferred&&!ios))return null;
   return <section role="dialog" aria-label="Instalar o aplicativo" className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-md rounded-xl border border-line bg-surface p-4 shadow-2xl">
     <button type="button" onClick={dismiss} aria-label="Fechar" className="absolute right-1.5 top-1.5 flex h-11 w-11 items-center justify-center rounded-lg text-muted hover:bg-ink/5"><X size={20} aria-hidden/></button>
     <div className="flex items-start gap-3 pr-9">

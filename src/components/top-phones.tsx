@@ -4,8 +4,12 @@ import type {TopPhone} from "@/data/content";
 
 const affiliateRel="sponsored nofollow noopener noreferrer";
 
+function track(item:TopPhone,placement:"botao"|"imagem"){
+  return {"data-affiliate":item.name,"data-position":String(item.rank),"data-placement":placement,"data-store":"Mercado Livre"};
+}
+
 function Cta({item,className=""}:{item:TopPhone;className?:string}){
-  return <a href={item.href} target="_blank" rel={affiliateRel} className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-gold px-5 text-sm font-bold text-on-gold hover:bg-gold-hover ${className}`}>Ver oferta no Mercado Livre <ArrowUpRight size={16} aria-hidden/></a>
+  return <a href={item.href} target="_blank" rel={affiliateRel} {...track(item,"botao")} className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-gold px-5 text-sm font-bold text-on-gold hover:bg-gold-hover ${className}`}>Ver oferta no Mercado Livre <ArrowUpRight size={16} aria-hidden/></a>
 }
 
 function Price({item,dark=false,big=false}:{item:TopPhone;dark?:boolean;big?:boolean}){
@@ -23,7 +27,7 @@ function Featured({item}:{item:TopPhone}){
       <span aria-hidden className="font-display text-8xl font-black leading-none text-gold">1</span>
       <span className="pt-2 text-sm font-semibold text-slate-300">{item.sold}</span>
     </div>
-    <a href={item.href} target="_blank" rel={affiliateRel} aria-label={`Ver ${item.name} no Mercado Livre`} className="my-6 flex h-64 items-center justify-center rounded-lg bg-white p-4"><img src={item.image} alt={item.name} fetchPriority="high" referrerPolicy="no-referrer" className="h-full w-full object-contain"/></a>
+    <a href={item.href} target="_blank" rel={affiliateRel} {...track(item,"imagem")} aria-label={`Ver ${item.name} no Mercado Livre`} className="my-6 flex h-64 items-center justify-center rounded-lg bg-white p-4"><img src={item.image} alt={item.name} fetchPriority="high" referrerPolicy="no-referrer" className="h-full w-full object-contain"/></a>
     <span className="text-sm font-semibold text-slate-300">{item.brand}</span>
     <h2 className="mt-1 text-3xl font-extrabold leading-tight">{item.name}</h2>
     <ul className="mt-4 space-y-1.5 text-slate-200">{item.specs.map(s=><li key={s}>✓ {s}</li>)}</ul>
@@ -37,7 +41,7 @@ function Featured({item}:{item:TopPhone}){
 function Row({item}:{item:TopPhone}){
   return <li className="grid grid-cols-[2.25rem_5rem_minmax(0,1fr)] items-center gap-x-4 gap-y-4 py-6">
     <span aria-hidden className="font-display text-5xl font-black leading-none text-gold-ink">{item.rank}</span>
-    <a href={item.href} target="_blank" rel={affiliateRel} aria-label={`Ver ${item.name} no Mercado Livre`} className="flex h-20 w-20 items-center justify-center rounded-md bg-white p-1"><img src={item.image} alt={item.name} loading="lazy" referrerPolicy="no-referrer" className="h-full w-full object-contain"/></a>
+    <a href={item.href} target="_blank" rel={affiliateRel} {...track(item,"imagem")} aria-label={`Ver ${item.name} no Mercado Livre`} className="flex h-20 w-20 items-center justify-center rounded-md bg-white p-1"><img src={item.image} alt={item.name} loading="lazy" referrerPolicy="no-referrer" className="h-full w-full object-contain"/></a>
     <div className="min-w-0">
       <span className="text-sm font-semibold text-muted">{item.brand}</span>
       <h3 className="text-lg font-extrabold leading-snug">{item.name}</h3>
